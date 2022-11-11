@@ -36,11 +36,3 @@ model Category {
 
   @@map("categories")
 }
-
-model User {
-  id       Int    @id @default(autoincrement())
-  username String @unique
-  hash     String
-
-  @@map("users")
-}
