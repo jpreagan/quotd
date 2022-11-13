@@ -2,10 +2,7 @@ services:
   db:
     image: mysql:8
     restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: quotd
-      MYSQL_USER: mysql
-      MYSQL_PASSWORD: mysql
+    env_file:
+      - .env
     ports:
       - "3306:3306"
