@@ -55,6 +55,7 @@ export class QuotesService {
     } = createQuoteDto;
     return this.prisma.quote.create({
       data: createQuoteWithAuthorAndCategory(text, author, category),
+      select: quoteWithAuthorAndCategory,
     });
   }
 
@@ -86,6 +87,7 @@ export class QuotesService {
     return this.prisma.quote.update({
       where: { id },
       data: createQuoteWithAuthorAndCategory(text, author, category),
+      select: quoteWithAuthorAndCategory,
     });
   }
 
