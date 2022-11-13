@@ -36,6 +36,15 @@ npm install
 ### Running the app
 
 ```bash
+# Copy sample .env file. You may need to edit the values.
+cp .env.dist .env
+
+# Start the supporting services in background
+npm run db:up
+
+# Setup the database
+npx prisma db push
+
 # development
 npm run start
 
