@@ -38,6 +38,7 @@ COPY --chown=node:node --from=development /usr/src/app/node_modules ./node_modul
 # Bundle app source
 COPY --chown=node:node . .
 
+RUN npx prisma generate
 RUN npm run build
 
 ENV NODE_ENV production
