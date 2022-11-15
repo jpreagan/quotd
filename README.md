@@ -4,7 +4,7 @@ Quotd is a public API serving quotes and aphorisms to inspire and uplift humanit
 
 ## Getting started
 
-To get started, you may receive a random quote with:
+You may receive a random quote with:
 
 ```bash
 curl https://api.quotd.io/quotes/random
@@ -16,14 +16,14 @@ Or a specific quote:
 curl https://api.quotd.io/quotes/1
 ```
 
-You may also access:
+Also check out:
 
 - all quotes (`/quotes`)
 - a list of categories (`/categories`)
 - a list of authors (`/authors`)
 - all quotes from a specific author (`/authors/1`).
 
-Check out the [documentation](https://api.quotd.io/) for more information.
+See the [documentation](https://api.quotd.io/) for more information.
 
 ## Development
 
@@ -33,18 +33,29 @@ Check out the [documentation](https://api.quotd.io/) for more information.
 npm install
 ```
 
-### Running the app
+### Configuration
 
 ```bash
 # Copy sample .env file. You may need to edit the values.
 cp .env.dist .env
+```
 
+### Set up the database
+
+```bash
 # Start the supporting services in background
 npm run db:up
 
 # Setup the database
 npx prisma db push
 
+# Seed the database (optional)
+npx prisma db seed
+```
+
+### Running the app
+
+```bash
 # development
 npm run start
 
