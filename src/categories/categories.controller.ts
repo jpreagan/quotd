@@ -13,6 +13,7 @@ import { CategoriesService } from './categories.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { CategoryEntity } from './entity/category.entity';
 
 @Controller('categories')
 @ApiTags('Categories')
@@ -22,19 +23,21 @@ export class CategoriesController {
   @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Create a new category' })
   @Post()
-  create(@Body() createCategoryDto: CreateCategoryDto) {
+  create(
+    @Body() createCategoryDto: CreateCategoryDto,
+  ): Promise<CategoryEntity> {
     return this.categoriesService.create(createCategoryDto);
   }
 
   @ApiOperation({ summary: 'Returns a list of categories' })
   @Get()
-  findAll() {
+  findAll(): Promise<CategoryEntity[]> {
     return this.categoriesService.findAll();
   }
 
   @ApiOperation({ summary: 'Returns a category for a given id' })
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: string): Promise<CategoryEntity> {
     return this.categoriesService.findOne(+id);
   }
 
@@ -44,14 +47,14 @@ export class CategoriesController {
   update(
     @Param('id') id: string,
     @Body() updateCategoryDto: UpdateCategoryDto,
-  ) {
+  ): Promise<CategoryEntity> {
     return this.categoriesService.update(+id, updateCategoryDto);
   }
 
   @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Delete a category by id' })
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.categoriesService.remove(+id);
+  async remove(@Param('id') id: string): Promise<void> {
+    await this.categoriesService.remove(+id);
   }
 }
