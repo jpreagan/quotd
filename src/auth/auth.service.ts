@@ -12,13 +12,15 @@ export class AuthService {
 
   async validateUser(username: string, password: string): Promise<any> {
     const user = await this.usersService.findOne(username);
-    try {
-      await argon2.verify(user?.hash, password);
-      const { hash, ...result } = user;
-      return result;
-    } catch {
+    if (!user) {
       return null;
     }
+    const isMatch = await argon2.verify(user?.hash, password);
+    if (!isMatch) {
+      return null;
+    }
+    const { hash, ...result } = user;
+    return result;
   }
 
   async login(user: any) {
