@@ -1,5 +1,7 @@
+docker-compose.yml
 Dockerfile
 .dockerignore
+.env
 node_modules
 npm-debug.log
 dist
