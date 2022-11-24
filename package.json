@@ -12,7 +12,7 @@
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/src/main",
+    "start:prod": "node dist/main",
     "db:rm": "docker compose rm db --force --stop --volumes",
     "db:up": "docker compose up db --detach",
     "db:restart": "run-s db:rm db:up",
