@@ -29,9 +29,7 @@ export class AuthorsService {
   }
 
   findAll() {
-    return this.prisma.author.findMany({
-      select: authorWithQuotes,
-    });
+    return this.prisma.author.findMany();
   }
 
   findOne(id: number) {
