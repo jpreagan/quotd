@@ -4,7 +4,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import { CreateQuoteDto } from './dto/create-quote.dto';
 import { UpdateQuoteDto } from './dto/update-quote.dto';
 
-const createQuoteWithAuthorAndCategory = (
+const createQuoteValidator = (
   text: string,
   author: string,
   category: string,
@@ -26,7 +26,7 @@ const createQuoteWithAuthorAndCategory = (
   });
 };
 
-const quoteWithAuthorAndCategory = Prisma.validator<Prisma.QuoteSelect>()({
+const selectQuoteValidator = Prisma.validator<Prisma.QuoteSelect>()({
   id: true,
   text: true,
   author: {
@@ -54,14 +54,14 @@ export class QuotesService {
       category: { name: category },
     } = createQuoteDto;
     return this.prisma.quote.create({
-      data: createQuoteWithAuthorAndCategory(text, author, category),
-      select: quoteWithAuthorAndCategory,
+      data: createQuoteValidator(text, author, category),
+      select: selectQuoteValidator,
     });
   }
 
   findAll() {
     return this.prisma.quote.findMany({
-      select: quoteWithAuthorAndCategory,
+      select: selectQuoteValidator,
     });
   }
 
@@ -74,7 +74,7 @@ export class QuotesService {
   findOne(id: number) {
     return this.prisma.quote.findUnique({
       where: { id },
-      select: quoteWithAuthorAndCategory,
+      select: selectQuoteValidator,
     });
   }
 
@@ -86,8 +86,8 @@ export class QuotesService {
     } = updateQuoteDto;
     return this.prisma.quote.update({
       where: { id },
-      data: createQuoteWithAuthorAndCategory(text, author, category),
-      select: quoteWithAuthorAndCategory,
+      data: createQuoteValidator(text, author, category),
+      select: selectQuoteValidator,
     });
   }
 
