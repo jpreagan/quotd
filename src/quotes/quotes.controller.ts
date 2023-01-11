@@ -13,7 +13,10 @@ import { CreateQuoteDto } from './dto/create-quote.dto';
 import { UpdateQuoteDto } from './dto/update-quote.dto';
 import { QuotesService } from './quotes.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { QuoteEntity } from './entity/quote.entity';
+import {
+  QuoteEntity,
+  QuoteWithAuthorAndCategoryEntity,
+} from './entity/quote.entity';
 
 @Controller('quotes')
 @ApiTags('Quotes')
@@ -41,7 +44,7 @@ export class QuotesController {
 
   @ApiOperation({ summary: 'Returns a quote for a given id' })
   @Get(':id')
-  findOne(@Param('id') id: string): Promise<QuoteEntity> {
+  findOne(@Param('id') id: string): Promise<QuoteWithAuthorAndCategoryEntity> {
     return this.quotesService.findOne(+id);
   }
 
