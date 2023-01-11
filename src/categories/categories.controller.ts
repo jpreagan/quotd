@@ -13,7 +13,10 @@ import { CategoriesService } from './categories.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { CategoryEntity } from './entity/category.entity';
+import {
+  CategoryEntity,
+  CategoryWithQuotesEntity,
+} from './entity/category.entity';
 
 @Controller('categories')
 @ApiTags('Categories')
@@ -37,7 +40,7 @@ export class CategoriesController {
 
   @ApiOperation({ summary: 'Returns a category for a given id' })
   @Get(':id')
-  findOne(@Param('id') id: string): Promise<CategoryEntity> {
+  findOne(@Param('id') id: string): Promise<CategoryWithQuotesEntity> {
     return this.categoriesService.findOne(+id);
   }
 
