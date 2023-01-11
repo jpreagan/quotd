@@ -15,7 +15,7 @@ import { UpdateCategoryDto } from './dto/update-category.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import {
   CategoryEntity,
-  CategoryWithQuotesEntity,
+  CategoryWithAuthorAndQuotesEntity,
 } from './entity/category.entity';
 
 @Controller('categories')
@@ -40,7 +40,7 @@ export class CategoriesController {
 
   @ApiOperation({ summary: 'Returns a category for a given id' })
   @Get(':id')
-  findOne(@Param('id') id: string): Promise<CategoryWithQuotesEntity> {
+  findOne(@Param('id') id: string): Promise<CategoryWithAuthorAndQuotesEntity> {
     return this.categoriesService.findOne(+id);
   }
 

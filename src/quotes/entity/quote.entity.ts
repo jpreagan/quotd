@@ -9,6 +9,15 @@ export class QuoteEntity {
   text: string;
 }
 
+export class QuoteWithAuthorEntity {
+  @ApiProperty({ example: 1 })
+  id: number;
+  @ApiProperty({ example: 'The rain in Spain stays mainly in the plain.' })
+  text: string;
+
+  author: AuthorEntity;
+}
+
 export class QuoteWithAuthorAndCategoryEntity {
   @ApiProperty({ example: 1 })
   id: number;

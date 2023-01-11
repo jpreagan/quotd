@@ -1,7 +1,25 @@
 import { Injectable } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
+
+const categoryWithAuthorAndQuotes = Prisma.validator<Prisma.CategorySelect>()({
+  id: true,
+  name: true,
+  quotes: {
+    select: {
+      id: true,
+      text: true,
+      author: {
+        select: {
+          id: true,
+          name: true,
+        },
+      },
+    },
+  },
+});
 
 @Injectable()
 export class CategoriesService {
@@ -23,16 +41,7 @@ export class CategoriesService {
   findOne(id: number) {
     return this.prisma.category.findUnique({
       where: { id },
-      select: {
-        id: true,
-        name: true,
-        quotes: {
-          select: {
-            id: true,
-            text: true,
-          },
-        },
-      },
+      select: categoryWithAuthorAndQuotes,
     });
   }
 

@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { QuoteEntity } from '../../quotes/entity/quote.entity';
+import { QuoteWithAuthorEntity } from '../../quotes/entity/quote.entity';
 
 export class CategoryEntity {
   @ApiProperty({ example: 1 })
@@ -8,11 +8,11 @@ export class CategoryEntity {
   name: string;
 }
 
-export class CategoryWithQuotesEntity {
+export class CategoryWithAuthorAndQuotesEntity {
   @ApiProperty({ example: 1 })
   id: number;
   @ApiProperty({ example: 'Wisdom' })
   name: string;
   @ApiProperty({ isArray: true })
-  quotes: QuoteEntity[];
+  quotes: QuoteWithAuthorEntity[];
 }
