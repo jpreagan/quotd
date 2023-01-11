@@ -4,6 +4,21 @@ const prisma = new PrismaClient();
 
 const quoteData = [
   {
+    text: 'The rain in Spain stays mainly in the plain.',
+    author: {
+      connectOrCreate: {
+        where: { name: 'Audrey Hepburn' },
+        create: { name: 'Audrey Hepburn' },
+      },
+    },
+    category: {
+      connectOrCreate: {
+        where: { name: 'Wisdom' },
+        create: { name: 'Wisdom' },
+      },
+    },
+  },
+  {
     text: 'The greatest glory in living lies not in never falling, but in rising every time we fall.',
     author: {
       connectOrCreate: {
